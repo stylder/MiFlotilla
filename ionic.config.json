@@ -1,6 +1,6 @@
 {
   "name": "MiFlotilla",
-  "app_id": "deb5f06e",
+  "app_id": "afd9ae4c",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
