@@ -3,40 +3,43 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Mis Viajes</ion-title>
   </ion-navbar>
 </ion-header>
 
 
   <ion-content class="card-background-page">
+    <ion-toolbar no-border-top>
+      <ion-searchbar placeholder="Filtrar Viajes" (ionInput)="filterItems($event)"></ion-searchbar>
+    </ion-toolbar>
 
 
-
-    <ion-card>
-
+    <ion-card (click)="showViaje(1)" >
       <ion-item>
-        <ion-avatar item-start>
-          <img src="https://www.emirates.com/mx/spanish/images/IMG_6549_tcm521-2164628.jpg"/>
-        </ion-avatar>
-        <h2>Santiago García Cabral</h2>
-        <p>November 5, 1955</p>
+        <h2 text-center>Morelos -  Monterrey ({{dateNow | date: 'dd/MM/yyyy'}})</h2>
+        <h4 text-center>Mineral</h4>
       </ion-item>
       <img src="https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0017%7Clabel:%7CJerez,+Zacatecas&markers=size:mid%7Ccolor:0x00ff05%7Clabel:N%7CMonterrey,+Nuevo+León" alt="Google Map of "/>
       <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        <p>
+          Viaje realizado de la ciudad a Morelos a Monterrey.
+        </p>
       </ion-card-content>
 
       <ion-row>
         <ion-col>
           <button ion-button icon-left clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 Likes</div>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
           </button>
         </ion-col>
         <ion-col>
           <button ion-button icon-left clear small>
             <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
+            <div>4 Mov.</div>
           </button>
         </ion-col>
         <ion-col center text-center>
@@ -45,7 +48,5 @@
           </ion-note>
         </ion-col>
       </ion-row>
-
-
     </ion-card>
   </ion-content>
