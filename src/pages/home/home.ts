@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
-
-
-import { AngularFireDatabase } from 'angularfire2/database';
+import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import {Viajes} from "../../class/Viajes";
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'page-home',
@@ -10,19 +10,18 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 
 
-export class HomePage  implements OnInit{
+export class HomePage implements OnInit {
 
   dateNow = new Date();
-  listaViajes;
 
 
-  constructor(public navCtrl: NavController, ) {
-    this.listaViajes = this.afd.list('viajes');
+  viajes: AngularFireList<Viajes[]>;
+
+  constructor(public navCtrl: NavController,public afDatabase: AngularFireDatabase) {
+
   }
 
-  ngOnInit() {
-    // ...
-  }
+  ngOnInit() { }
 
   showViaje(id) {
     console.log('cambiar vista', id)
@@ -37,13 +36,6 @@ export class HomePage  implements OnInit{
     console.log('>>>>', val)
   }
 
-  getItemsList() {
 
-  }
-
-  addViaje() {
-    this.afd.list('/viajes/').push({});
-
-  }
 }
 
