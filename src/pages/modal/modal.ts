@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {IonicPage, ViewController, NavParams} from 'ionic-angular';
+import {IonicPage, ViewController} from 'ionic-angular';
+import {AngularFireDatabase} from "angularfire2/database";
 
 /**
  * Generated class for the ModalPage page.
@@ -15,15 +16,29 @@ import {IonicPage, ViewController, NavParams} from 'ionic-angular';
 })
 export class ModalPage {
 
+  viaje = {
+    estrellas: 1,
+    movimientos: 0
+  };
 
-  myParam: string;
+  camiones = [];
 
   constructor(public viewCtrl: ViewController,
-              params: NavParams) {
-      this.myParam = params.get('myParam');
+              public afd: AngularFireDatabase) {
+    this.afd.list('/camiones').valueChanges().subscribe(items => {
+      console.log(items)
+      this.camiones = items;
+    })
   }
 
   dismiss() {
+    this.viewCtrl.dismiss();
+  }
+
+
+  guardarViaje() {
+    console.log('Guardando viaje', this.viaje)
+    this.afd.list('/viajes/').push(this.viaje);
     this.viewCtrl.dismiss();
   }
 
