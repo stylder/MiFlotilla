@@ -19,7 +19,7 @@
 
     <img src="https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0017%7Clabel:%7CJerez,+Zacatecas&markers=size:mid%7Ccolor:0x00ff05%7Clabel:N%7CMonterrey,+Nuevo+León">
     <ion-fab right bottom>
-      <button ion-fab>
+      <button ion-fab (click)="takePhoto()">
         <ion-icon name="camera"></ion-icon>
       </button>
     </ion-fab>
@@ -31,11 +31,14 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon name="wine" item-left large ></ion-icon>
-      <h2>Institute of Fine Cocktails</h2>
+      <ion-icon name="car" item-left large ></ion-icon>
+      <h2>115</h2>
       <p>14 S. Hop Avenue, Madison, WI 53703</p>
     </ion-item>
 
+  <ion-item>
+    <img [src]="myPhotoURL">
+  </ion-item>
 
 
 </ion-content>

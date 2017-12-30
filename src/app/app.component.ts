@@ -23,7 +23,17 @@ export class MyApp {
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
               private auth: AuthProvider) {
+
     this.initializeApp();
+
+    this.auth.Session.subscribe(session => {
+      console.log('Session >> ', session)
+      if (session) {
+        this.rootPage = HomePage;
+      } else {
+        this.rootPage = LoginPage;
+      }
+    });
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -38,13 +48,6 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.auth.Session.subscribe(session => {
-        if (session) {
-          this.rootPage = HomePage;
-        } else {
-          this.rootPage = LoginPage;
-        }
-      });
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();

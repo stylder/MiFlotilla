@@ -10,6 +10,7 @@ import { ProfilePage } from '../pages/profile/profile';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Camera } from '@ionic-native/camera';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -49,6 +50,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     FirebaseProvider,

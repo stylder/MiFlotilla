@@ -14,11 +14,11 @@ export class HomePage implements OnInit {
 
   dateNow = new Date();
 
-  viajes: Array<Viajes> = [];
+  viajes: any[] = [];
 
 
   constructor(public navCtrl: NavController,
-              private afd: AngularFireDatabase,
+              public afd: AngularFireDatabase,
               public alertCtrl: AlertController) {
 
     this.afd.list('/viajes').valueChanges().subscribe(items => {
