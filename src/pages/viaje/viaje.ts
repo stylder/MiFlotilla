@@ -67,4 +67,8 @@ export class ViajePage {
     return uuid;
   }
 
+  private gastosViaje (){
+
+  }
+
 }

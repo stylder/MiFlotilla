@@ -37,7 +37,8 @@
     </ion-item>
 
   <ion-item>
-    <img [src]="myPhotoURL">
+    <ion-spinner item-start name="dots" *ngIf="!myPhotoURL"></ion-spinner>
+    <img [src]="myPhotoURL" *ngIf="myPhotoURL">
   </ion-item>
 
 
