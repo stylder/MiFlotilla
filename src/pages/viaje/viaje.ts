@@ -37,7 +37,8 @@ export class ViajePage {
       destinationType: this.Camera.DestinationType.DATA_URL,
       sourceType: this.Camera.PictureSourceType.CAMERA,
       encodingType: this.Camera.EncodingType.JPEG,
-      saveToPhotoAlbum: true
+      saveToPhotoAlbum: true,
+      correctOrientation: true
     }).then(imageData => {
       this.myPhoto = imageData;
       this.uploadPhoto();
