@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
+import { ModalPage } from '../pages/modal/modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,7 +31,8 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     HomePage,
     ListPage,
     LoginPage,
-    ProfilePage
+    ProfilePage,
+    ModalPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     HomePage,
     ListPage,
     LoginPage,
-    ProfilePage
+    ProfilePage,
+    ModalPage
   ],
   providers: [
     StatusBar,
