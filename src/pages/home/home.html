@@ -28,7 +28,7 @@
       <h4 text-center>{{viaje.carga}} - {{viaje.date}}</h4>
     </ion-item>
     <img
-      src="https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0017%7Clabel:%7CJerez,+Zacatecas&markers=size:mid%7Ccolor:0x00ff05%7Clabel:N%7CMonterrey,+Nuevo+León"
+      [src]="'https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0017%7Clabel:%7C'+viaje.origen+'&markers=size:mid%7Ccolor:0x00ff05%7Clabel:N%7C'+viaje.destino"
       alt="Google Map of "/>
     <ion-card-content>
       <p>
