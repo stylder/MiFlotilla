@@ -16,7 +16,14 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class ProfilePage {
 
+  imgurl = 'https://firebasestorage.googleapis.com/v0/b/myapp-4eadd.appspot.com/o/chatterplace.png?alt=media&token=e51fa887-bfc6-48ff-87c6-e2c61976534e';
+  moveon = true;
+
+  user;
   constructor(public auth : AuthProvider) {
+
+    this.user = this.auth.User
+    console.log('>>', this.user)
   }
 
   ionViewDidLoad() {
@@ -26,5 +33,12 @@ export class ProfilePage {
     this.auth.logout();
   }
 
+
+  chooseimage(){
+
+  }
+  updateproceed(){
+
+  }
 
 }
