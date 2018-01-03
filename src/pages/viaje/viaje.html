@@ -16,30 +16,38 @@
 <ion-content>
 
 
-
-    <img src="https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0017%7Clabel:%7CJerez,+Zacatecas&markers=size:mid%7Ccolor:0x00ff05%7Clabel:N%7CMonterrey,+Nuevo+León">
-    <ion-fab right bottom>
-      <button ion-fab (click)="takePhoto()">
-        <ion-icon name="camera"></ion-icon>
-      </button>
-    </ion-fab>
-
-    <ion-item>
-      <ion-icon name="cog" item-start large></ion-icon>
-      <h2>Mineral</h2>
-      <p>500 Tn</p>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="car" item-left large ></ion-icon>
-      <h2>Camión</h2>
-      <p>115 - IDSMWWLSKW</p>
-    </ion-item>
+  <img
+    [src]="'https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0017%7Clabel:%7C'+viaje.origen+'&markers=size:mid%7Ccolor:0x00ff05%7Clabel:N%7C'+viaje.destino">
+  <ion-fab right bottom>
+    <button ion-fab (click)="takePhoto()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+  </ion-fab>
 
   <ion-item>
-    <ion-spinner item-start name="dots" *ngIf="!myPhotoURL"></ion-spinner>
-    <img [src]="myPhotoURL" *ngIf="myPhotoURL">
+    <ion-icon name="cog" item-start large></ion-icon>
+    <h2>{{viaje.carga.tipo}}</h2>
+    <p>{{viaje.carga.cantidad}}</p>
   </ion-item>
+
+  <ion-item>
+    <ion-icon name="car" item-left large></ion-icon>
+    <h2>Camión</h2>
+    <p>{{viaje.camion}}</p>
+  </ion-item>
+  <!--<ion-card *ngFor="let movimiento of viaje.movimientos; let i = index">
+      <img [src]="movimiento.img"/>
+      <ion-card-content>
+        <ion-card-title>
+          {{movimiento.cantidad | currency:'MXN'}}
+        </ion-card-title>
+        <p>
+          {{movimiento.descripcion}}
+        </p>
+      </ion-card-content>
+    </ion-card>-->
+
+
 
 
 </ion-content>

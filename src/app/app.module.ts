@@ -19,8 +19,10 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {environment} from '../environments/environment';
+
+// PROVIDERS
 import { AuthProvider } from '../providers/auth/auth';
-import { FirebaseProvider } from '../providers/firebase/firebase';
+import { ViajeProvider } from '../providers/viaje/viaje';
 
 
 
@@ -56,7 +58,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    FirebaseProvider,
+    ViajeProvider,
   ]
 })
 export class AppModule {}

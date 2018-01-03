@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, AlertController, ModalController} from 'ionic-angular';
-import {Viajes} from "../../class/Viajes";
-import {AngularFireDatabase} from 'angularfire2/database';
+import {NavController, ModalController} from 'ionic-angular';
 import {ModalPage} from "../modal/modal";
-
+import {ViajeProvider} from "../../providers/viaje/viaje";
 
 @Component({
   selector: 'page-home',
@@ -13,21 +11,21 @@ import {ModalPage} from "../modal/modal";
 
 export class HomePage implements OnInit {
 
-  dateNow = new Date();
 
   viajes: any[] = [];
 
 
   constructor(public navCtrl: NavController,
-              public afd: AngularFireDatabase,
+              public viajesProvider: ViajeProvider,
               public modalCtrl: ModalController) {
 
-    this.afd.list('/viajes').valueChanges().subscribe(items => {
-      console.log(items)
+    this.viajesProvider.getViajesList().snapshotChanges().map(actions => {
+      return actions.map(action => ({key: action.key, ...action.payload.val()}));
+    }).subscribe(items => {
       this.viajes = items;
-    })
-    //this.shoppingItems = this.firebaseProvider.getShoppingItems();
-
+      console.log('Viajes ', this.viajes);
+      return items.map(item => item.key);
+    });
   }
 
   range(last) {
