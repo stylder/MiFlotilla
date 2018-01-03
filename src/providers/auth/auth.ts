@@ -64,12 +64,12 @@ export class AuthProvider {
       }).catch((err) => {
         reject(err);
       })
-    })
+    });
     return promise;
   }
 
   updateimage(imageurl) {
-    var promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       this.afAuth.auth.currentUser.updateProfile({
         displayName: this.afAuth.auth.currentUser.displayName,
         photoURL: imageurl
@@ -91,13 +91,13 @@ export class AuthProvider {
   }
 
   getuserdetails() {
-    var promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       this.firedata.child(firebase.auth().currentUser.uid).once('value', (snapshot) => {
         resolve(snapshot.val());
       }).catch((err) => {
         reject(err);
       })
-    })
+    });
     return promise;
   }
 

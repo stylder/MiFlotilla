@@ -23,17 +23,16 @@ export class ViajePage {
   myPhoto: any;
   myPhotoURL: any;
   id;
-  keys = [];
+  movimientos: any = [
+    {
+      cantidad: 1,
+      descripcion: '',
+      img: ''
+    }
+  ];
 
-  viaje: any = {
-    movimientos: [
-      {
-        cantidad: 1,
-        descripcion: '',
-        img: ''
-      }
-    ]
-  };
+
+  viaje: any = {};
 
   constructor(public viajesProvider: ViajeProvider,
               public navParams: NavParams,
@@ -41,21 +40,22 @@ export class ViajePage {
               public Camera: Camera) {
     this.viaje = navParams.get('id');
 
-    this.viajesProvider.getViaje(this.viaje.key).snapshotChanges().map(actions => {
-      console.log('ACT::::', actions);
-      return actions.map(action => ({key: action.key, ...action.payload.val()}));
-    }).subscribe(items => {
-      console.log('::::', items);
-      return items.map(item => item.key);
-    });
     console.log('Viaje: ', this.viaje)
-
-    this.keys = this.viaje.movimientos != null ? Object.keys(this.viaje.movimientos) : [];
+    this.movimientos = this.getArrayObject(this.viaje.movimientos)
 
 
     this.myPhotosRef = firebase.storage().ref('/photos/');
 
 
+  }
+
+  getArrayObject(object) {
+    let array = [];
+    let keys = Object.keys(object);
+    for (let value of keys) {
+      array.push(object[value])
+    }
+    return array;
   }
 
   ionViewDidLoad() {
@@ -121,6 +121,7 @@ export class ViajePage {
 
                 console.log('Saved clicked', data);
                 this.viajesProvider.addMovimiento(this.viaje.key, movimiento)
+                this.movimientos.push(movimiento);
               }
             }
           ]
