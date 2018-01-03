@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import {IonicPage, AlertController} from 'ionic-angular';
 import {AuthProvider} from '../../providers/auth/auth';
 
 /**
@@ -18,9 +18,7 @@ export class LoginPage {
 
   user = {email: '', password: ''};
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public auth: AuthProvider,
+  constructor(public auth: AuthProvider,
               public alertCtrl: AlertController) {
   }
 

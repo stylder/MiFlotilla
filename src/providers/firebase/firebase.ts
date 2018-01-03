@@ -11,10 +11,10 @@ export class FirebaseProvider {
   }
 
   addItem(name) {
-    this.afd.list('/shoppingItems/').push(name);
+    this.afd.list('/viajes/').push(name);
   }
 
   removeItem(id) {
-    this.afd.list('/shoppingItems/').remove(id);
+    this.afd.list('/viajes/').remove(id);
   }
 }

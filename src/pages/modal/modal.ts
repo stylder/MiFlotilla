@@ -26,7 +26,7 @@ export class ModalPage {
   constructor(public viewCtrl: ViewController,
               public afd: AngularFireDatabase) {
     this.afd.list('/camiones').valueChanges().subscribe(items => {
-      console.log(items)
+      console.log(items);
       this.camiones = items;
     })
   }
@@ -37,7 +37,7 @@ export class ModalPage {
 
 
   guardarViaje() {
-    console.log('Guardando viaje', this.viaje)
+    console.log('Guardando viaje', this.viaje);
     this.afd.list('/viajes/').push(this.viaje);
     this.viewCtrl.dismiss();
   }

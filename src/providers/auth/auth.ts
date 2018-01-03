@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import {LoginPage} from "../../pages/login/login";
 
 /*
   Generated class for the AuthProvider provider.
@@ -25,7 +26,7 @@ export class AuthProvider {
   // Logout de usuario
   logout(){
     this.afAuth.auth.signOut().then(()=>{
-      // hemos salido
+      //this.navCtrl.setRoot(LoginPage);
     })
   }
 
