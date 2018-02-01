@@ -29,7 +29,11 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Carga</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="viaje.carga"></ion-input>
+      <ion-input type="text" value="" [(ngModel)]="viaje.carga.tipo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Cantidad</ion-label>
+      <ion-input type="number" value="" [(ngModel)]="viaje.carga.cantidad"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Camión</ion-label>
