@@ -15,7 +15,7 @@ export class AuthProvider {
   firedata = firebase.database().ref('/users');
 
 
-  constructor(private afAuth :  AngularFireAuth) {
+  constructor(public afAuth :  AngularFireAuth) {
     console.log('Hello AuthProvider Provider');
   }
 

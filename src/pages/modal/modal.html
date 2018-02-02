@@ -16,7 +16,7 @@
 
     <ion-item>
       <ion-label>Fecha Viaje</ion-label>
-      <ion-datetime pickerFormat="DD MMM YYYY"  displayFormat="DD MMM YYYY" [(ngModel)]="viaje.date"></ion-datetime>
+      <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="viaje.date"></ion-datetime>
     </ion-item>
 
     <ion-item>
@@ -33,12 +33,12 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Cantidad</ion-label>
-      <ion-input type="number" value="" [(ngModel)]="viaje.carga.cantidad"></ion-input>
+      <ion-input type="text" value="" [(ngModel)]="viaje.carga.cantidad"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Camión</ion-label>
       <ion-select [(ngModel)]="viaje.camion">
-        <ion-option [value]="camion.identificador"  *ngFor="let camion of camiones">{{camion.numero_economico}}</ion-option>
+        <ion-option [value]="camion.identificador"  *ngFor="let camion of camiones">{{camion.identificador}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
