@@ -1,17 +1,16 @@
-import {User} from './user';
 
 export class Viaje {
 
   key?: string;
   camion?: string;
   uid?: string;
-  date?: Date;
+  date?: any;
   descripcion?: string;
   estrellas?: number;
   origen?: string;
   destino?: string;
 
-  conductor?: User;
+  conductor?: string;
 
   carga?: {
     cantidad?: string;

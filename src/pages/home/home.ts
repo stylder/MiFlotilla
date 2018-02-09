@@ -28,6 +28,19 @@ export class HomePage implements OnInit {
     });
   }
 
+  getArrayObject(object) {
+    if (object) {
+      const array = [];
+      const keys = Object.keys(object);
+      for (const value of keys) {
+        array.push(object[value])
+      }
+      return array;
+    } else {
+      return null;
+    }
+  }
+
   range(last) {
     let arr = []
     for (let i = 0; i < last; i++) {
@@ -43,11 +56,9 @@ export class HomePage implements OnInit {
   showViaje(id) {
     console.log('cambiar vista', id)
     this.navCtrl.push('ViajePage', {id: id});
-
   }
 
   ///////////////// FIREBASE /////////////////
-
   filterItems(ev: any) {
     let val = ev.target.value;
     console.log('>>>>', val)

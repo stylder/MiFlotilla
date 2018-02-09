@@ -62,12 +62,7 @@ export class ModalPage {
     this.user.subscribe(
       (user) => {
         if (user) {
-
-          this.viaje.conductor = {
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            uid: user.uid
-          }
+          this.viaje.conductor = user.uid
         }
       }
     );

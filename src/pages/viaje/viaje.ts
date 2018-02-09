@@ -44,18 +44,22 @@ export class ViajePage {
     this.movimientos = this.getArrayObject(this.viaje.movimientos)
 
 
-    this.myPhotosRef = firebase.storage().ref('/photos/');
+    this.myPhotosRef = firebase.storage().ref('/movimientos/');
 
 
   }
 
   getArrayObject(object) {
-    let array = [];
-    let keys = Object.keys(object);
-    for (let value of keys) {
-      array.push(object[value])
+    if (object) {
+      const array = [];
+      const keys = Object.keys(object);
+      for (const value of keys) {
+        array.push(object[value])
+      }
+      return array;
+    } else {
+      return null;
     }
-    return array;
   }
 
   ionViewDidLoad() {
