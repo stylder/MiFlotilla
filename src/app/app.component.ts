@@ -4,7 +4,6 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {HomePage} from '../pages/home/home';
-import {ListPage} from '../pages/list/list';
 import {LoginPage} from '../pages/login/login';
 import {ProfilePage} from '../pages/profile/profile';
 import {AuthProvider} from '../providers/auth/auth';
@@ -27,7 +26,6 @@ export class MyApp {
     this.initializeApp();
 
     this.auth.Session.subscribe(session => {
-      console.log('Session >> ', session)
       if (session) {
         this.rootPage = HomePage;
       } else {
@@ -38,7 +36,6 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       {title: 'Home', component: HomePage},
-      {title: 'List', component: ListPage},
       {title: 'Perfil', component: ProfilePage}
     ];
 

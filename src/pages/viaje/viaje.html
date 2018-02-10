@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Viaje Morelos a Monterrey</ion-title>
+    <ion-title>{{viaje.origen}} - {{viaje.destino}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,12 +17,18 @@
 
 
   <img
-    [src]="'https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0017%7Clabel:%7C'+viaje.origen+'&markers=size:mid%7Ccolor:0x00ff05%7Clabel:N%7C'+viaje.destino">
+      [src]="'https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:O%7C'+viaje.origen+'&markers=size:mid%7Ccolor:0x00ff3b%7Clabel:D%7C'+viaje.destino+'&key=AIzaSyCizFQRBKipfnmv9CDr4bF5UYe4VyPOTH4'">
   <ion-fab right bottom>
     <button ion-fab (click)="takePhoto()">
       <ion-icon name="camera"></ion-icon>
     </button>
   </ion-fab>
+
+  <ion-item>
+    <ion-icon name="navigate" item-start large></ion-icon>
+    <h2>{{viaje.origen}}</h2>
+    <p>{{viaje.destino}}</p>
+  </ion-item>
 
   <ion-item>
     <ion-icon name="cog" item-start large></ion-icon>

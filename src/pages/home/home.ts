@@ -12,37 +12,30 @@ import {ViajeProvider} from "../../providers/viaje/viaje";
 export class HomePage implements OnInit {
 
 
-  viajes: any[] = [];
+  viajes: any[];
 
 
   constructor(public navCtrl: NavController,
               public viajesProvider: ViajeProvider,
               public modalCtrl: ModalController) {
 
-    this.viajesProvider.getViajesList().snapshotChanges().map(actions => {
-      return actions.map(action => ({key: action.key, ...action.payload.val()}));
-    }).subscribe(items => {
-      this.viajes = items;
-      console.log('Viajes ', this.viajes);
-      return items.map(item => item.key);
-    });
+
+    this.viajesProvider.getList()
+      .subscribe(viajes => {
+        this.viajes = viajes;
+      });
   }
 
   getArrayObject(object) {
     if (object) {
-      const array = [];
-      const keys = Object.keys(object);
-      for (const value of keys) {
-        array.push(object[value])
-      }
-      return array;
+      return Object.keys(object);
     } else {
       return null;
     }
   }
 
   range(last) {
-    let arr = []
+    let arr = [];
     for (let i = 0; i < last; i++) {
       arr.push(i)
     }
@@ -65,9 +58,8 @@ export class HomePage implements OnInit {
   }
 
   openModal() {
-    console.log('modal')
-    var data = {message: 'hello world'};
-    var modalPage = this.modalCtrl.create(ModalPage, data);
+    const data = {message: 'hello world'};
+    const modalPage = this.modalCtrl.create(ModalPage, data);
     modalPage.present();
   }
 

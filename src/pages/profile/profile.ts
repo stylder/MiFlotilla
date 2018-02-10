@@ -16,19 +16,26 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class ProfilePage {
 
-  imgurl = 'https://firebasestorage.googleapis.com/v0/b/myapp-4eadd.appspot.com/o/chatterplace.png?alt=media&token=e51fa887-bfc6-48ff-87c6-e2c61976534e';
-  moveon = true;
 
+  moveon = true;
+  imgurl: string;
   user;
+
   constructor(public auth : AuthProvider) {
 
-    this.user = this.auth.User
-    console.log('>>', this.user)
+    this.imgurl = 'assets/img/common/no-image.gif';
+    this.auth.Session.subscribe(session => {
+      if (session) {
+        console.log('>>', session.photoURL);
+        this.imgurl = session.photoURL;
+      }
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
+
   cerrarSesion(){
     this.auth.logout();
   }
@@ -37,6 +44,7 @@ export class ProfilePage {
   chooseimage(){
 
   }
+
   updateproceed(){
 
   }

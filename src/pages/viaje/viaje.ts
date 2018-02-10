@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import {ViajeProvider} from "../../providers/viaje/viaje";
 import {AlertController} from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import {Viaje} from "../../class/Viajes";
 
 /**
  * Generated class for the ViajePage page.
@@ -24,7 +25,7 @@ export class ViajePage {
   myPhoto: any;
   myPhotoURL: any;
   id;
-  movimientos: any = [
+  movimientos: any[] = [
     {
       cantidad: 1,
       descripcion: '',
@@ -33,22 +34,24 @@ export class ViajePage {
   ];
 
 
-  viaje: any = {};
+  viaje: Viaje = {};
 
   constructor(public viajesProvider: ViajeProvider,
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
               public Camera: Camera) {
+
+    let loader = this.loadingCtrl.create({
+      content: "Cargando...",
+      duration: 400
+    });
+    loader.present();
+
     this.viaje = navParams.get('id');
-
-    console.log('Viaje: ', this.viaje)
-    this.movimientos = this.getArrayObject(this.viaje.movimientos)
-
-
+    this.movimientos = this.getArrayObject(this.viaje.movimientos);
+    console.log('movimientos', this.movimientos)
     this.myPhotosRef = firebase.storage().ref('/movimientos/');
-
-
   }
 
   getArrayObject(object) {
@@ -60,7 +63,7 @@ export class ViajePage {
       }
       return array;
     } else {
-      return null;
+      return [];
     }
   }
 
@@ -69,7 +72,7 @@ export class ViajePage {
   }
 
   takePhoto() {
-    
+
     this.Camera.getPicture({
       quality: 50,
       destinationType: this.Camera.DestinationType.DATA_URL,
@@ -89,7 +92,7 @@ export class ViajePage {
   presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Subiendo comprobante",
-      duration: 4000
+      duration: 600
     });
     loader.present();
   }
@@ -136,6 +139,7 @@ export class ViajePage {
                 };
 
                 console.log('Saved clicked', data);
+
                 this.viajesProvider.addMovimiento(this.viaje.key, movimiento)
                 this.movimientos.push(movimiento);
               }

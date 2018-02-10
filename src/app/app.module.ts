@@ -4,7 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { ModalPage } from '../pages/modal/modal';
@@ -23,6 +22,7 @@ import {environment} from '../environments/environment';
 // PROVIDERS
 import { AuthProvider } from '../providers/auth/auth';
 import { ViajeProvider } from '../providers/viaje/viaje';
+import { CamionesProvider } from '../providers/camiones/camiones';
 
 
 
@@ -31,7 +31,6 @@ import { ViajeProvider } from '../providers/viaje/viaje';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     ProfilePage,
     ModalPage
@@ -47,7 +46,6 @@ import { ViajeProvider } from '../providers/viaje/viaje';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     ProfilePage,
     ModalPage
@@ -59,6 +57,7 @@ import { ViajeProvider } from '../providers/viaje/viaje';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     ViajeProvider,
+    CamionesProvider,
   ]
 })
 export class AppModule {}

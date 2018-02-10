@@ -16,7 +16,7 @@
 
 <ion-content padding>
   <div class="profile-image">
-    <img src="{{imgurl}}">
+    <img [src]="imgurl">
   </div>
   <div>
     <button ion-button round outline (click)="chooseimage()">Choose an image</button>

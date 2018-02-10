@@ -1,22 +1,22 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
-import {Viaje} from '../../class/Viajes';
+import {Camion} from '../../class/camion';
 
 /*
-  Generated class for the ViajeProvider provider.
+  Generated class for the CamionesProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
 @Injectable()
-export class ViajeProvider {
+export class CamionesProvider {
 
-  dbPath = '/viajes';
+  dbPath = '/camiones';
 
 
-  itemsRef: AngularFireList<Viaje>;
-  items: Observable<Viaje[]>;
+  itemsRef: AngularFireList<Camion>;
+  items: Observable<Camion[]>;
 
   constructor(public afd: AngularFireDatabase) {
 
@@ -32,25 +32,16 @@ export class ViajeProvider {
     return this.items;
   }
 
-  addItem(item: Viaje) {
+  addItem(item: Camion) {
     return this.itemsRef.push(item);
   }
 
-  updateItem(key: string, item: Viaje) {
+  updateItem(key: string, item: Camion) {
     return this.itemsRef.update(key, item);
   }
 
   deleteItem(key: string) {
     return this.itemsRef.remove(key);
-  }
-
-  addMovimiento(id, movimiento) {
-    this.afd.list('/viajes/' + id + '/movimientos/').push(movimiento);
-  }
-
-  deleteMovimiento(viaje: string, movimiento: any) {
-    const path = 'viajes/' + viaje + '/movimentos/';
-    this.afd.database.ref('viajes/').ref.child(viaje).child('/movimientos/' + movimiento).remove();
   }
 
 }
