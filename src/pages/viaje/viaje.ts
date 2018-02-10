@@ -4,6 +4,7 @@ import {Camera} from '@ionic-native/camera';
 import firebase from 'firebase';
 import {ViajeProvider} from "../../providers/viaje/viaje";
 import {AlertController} from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the ViajePage page.
@@ -36,6 +37,7 @@ export class ViajePage {
 
   constructor(public viajesProvider: ViajeProvider,
               public navParams: NavParams,
+              public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
               public Camera: Camera) {
     this.viaje = navParams.get('id');
@@ -67,6 +69,7 @@ export class ViajePage {
   }
 
   takePhoto() {
+    
     this.Camera.getPicture({
       quality: 50,
       destinationType: this.Camera.DestinationType.DATA_URL,
@@ -75,11 +78,20 @@ export class ViajePage {
       saveToPhotoAlbum: true,
       correctOrientation: true
     }).then(imageData => {
+      this.presentLoading();
       this.myPhoto = imageData;
       this.uploadPhoto();
     }, error => {
       console.log("ERROR -> " + JSON.stringify(error));
     });
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Subiendo comprobante",
+      duration: 4000
+    });
+    loader.present();
   }
 
 

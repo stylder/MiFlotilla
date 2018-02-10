@@ -46,7 +46,7 @@
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon> 
-          <div *ngIf="viaje.movimientos">{{1}} Mov.</div>
+          <div *ngIf="viaje.movimientos">{{getArrayObject(viaje.movimientos).length}} Mov.</div>
           <div *ngIf="!viaje.movimientos">{{0}} Mov.</div>
 
         </button>
