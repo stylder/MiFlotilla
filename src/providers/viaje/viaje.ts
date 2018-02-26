@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Viaje} from '../../class/Viajes';
+import {AuthProvider} from "../auth/auth";
 
 /*
   Generated class for the ViajeProvider provider.
@@ -18,7 +19,8 @@ export class ViajeProvider {
   itemsRef: AngularFireList<Viaje>;
   items: Observable<Viaje[]>;
 
-  constructor(public afd: AngularFireDatabase) {
+  constructor(public afd: AngularFireDatabase, public auth: AuthProvider) {
+
 
     this.itemsRef = afd.list(this.dbPath);
 
@@ -27,6 +29,9 @@ export class ViajeProvider {
     });
   }
 
+  getItem (id) {
+    return this.afd.object(this.dbPath + '/' + id);
+  }
 
   getList() {
     return this.items;
@@ -48,8 +53,9 @@ export class ViajeProvider {
     this.afd.list('/viajes/' + id + '/movimientos/').push(movimiento);
   }
 
-  deleteMovimiento(viaje: string, movimiento: any) {
-    const path = 'viajes/' + viaje + '/movimentos/';
+  deleteMovimiento(viaje: string, movimiento: string) {
+    console.log('Delete Movimiento', viaje, movimiento);
+    
     this.afd.database.ref('viajes/').ref.child(viaje).child('/movimientos/' + movimiento).remove();
   }
 

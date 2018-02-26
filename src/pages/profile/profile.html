@@ -18,11 +18,20 @@
   <div class="profile-image">
     <img [src]="imgurl">
   </div>
+
+
   <div>
-    <button ion-button round outline (click)="chooseimage()">Choose an image</button>
+    <button ion-button round outline (click)="chooseimage()">Cambiar Imagen</button>
   </div>
+
   <div [hidden]="moveon">
     <button ion-button round outline (click)="updateproceed()">Upload & proceed</button>
   </div>
+
+  <div>
+    <h2>{{username}}</h2>
+  </div>
+
+  <hr>
   <button ion-button block (click)="cerrarSesion()">Cerrar Sesión</button>
 </ion-content>

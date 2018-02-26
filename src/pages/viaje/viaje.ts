@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavParams} from 'ionic-angular';
-import {Camera} from '@ionic-native/camera';
+import { ActionSheetController, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavParams } from 'ionic-angular';
+import { Camera } from '@ionic-native/camera';
+
 import firebase from 'firebase';
-import {ViajeProvider} from "../../providers/viaje/viaje";
-import {AlertController} from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
-import {Viaje} from "../../class/Viajes";
+import { ViajeProvider } from "../../providers/viaje/viaje";
+import { Viaje } from "../../class/Viajes";
 
 /**
  * Generated class for the ViajePage page.
@@ -25,22 +25,16 @@ export class ViajePage {
   myPhoto: any;
   myPhotoURL: any;
   id;
-  movimientos: any[] = [
-    {
-      cantidad: 1,
-      descripcion: '',
-      img: ''
-    }
-  ];
-
-
-  viaje: Viaje = {};
+  viaje: Viaje;
+  movimientos: any[];
 
   constructor(public viajesProvider: ViajeProvider,
-              public navParams: NavParams,
-              public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController,
-              public Camera: Camera) {
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public platform: Platform,
+    public actionSheetCtrl: ActionSheetController,
+    public Camera: Camera) {
 
     let loader = this.loadingCtrl.create({
       content: "Cargando...",
@@ -48,9 +42,20 @@ export class ViajePage {
     });
     loader.present();
 
-    this.viaje = navParams.get('id');
-    this.movimientos = this.getArrayObject(this.viaje.movimientos);
-    console.log('movimientos', this.movimientos)
+    const id = navParams.get('id');
+    console.log('...', id);
+    this.id = id.key ? id.key : '';
+
+    this.viaje = id;
+
+    this.viajesProvider.getItem(id.key).valueChanges().subscribe((viaje) => {
+      this.viaje = viaje
+      console.log('CARGANDO IMGAEN', this.viaje)
+      this.movimientos = this.getArrayObject(this.viaje.movimientos);
+      console.log('movimientos', this.movimientos)
+    })
+
+
     this.myPhotosRef = firebase.storage().ref('/movimientos/');
   }
 
@@ -101,7 +106,7 @@ export class ViajePage {
   uploadPhoto() {
 
     this.myPhotosRef.child(this.generateUUID() + '.jpeg')
-      .putString(this.myPhoto, 'base64', {contentType: 'image/jpeg'})
+      .putString(this.myPhoto, 'base64', { contentType: 'image/jpeg' })
       .then((savedPicture) => {
         this.myPhotoURL = savedPicture.downloadURL;
 
@@ -140,7 +145,7 @@ export class ViajePage {
 
                 console.log('Saved clicked', data);
 
-                this.viajesProvider.addMovimiento(this.viaje.key, movimiento)
+                this.viajesProvider.addMovimiento(this.id, movimiento)
                 this.movimientos.push(movimiento);
               }
             }
@@ -164,5 +169,59 @@ export class ViajePage {
       return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
     return uuid;
+  }
+
+
+  actionMovimiento(movimiento) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modifica tu movimiento',
+      buttons: [
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            console.log('Eliminar movimiento :::::', movimiento);
+
+            console.log(movimiento);
+            const object = this.viaje.movimientos
+            const keys = Object.keys(object);
+            let id = 0;
+            for (const value of keys) {
+              if (object[value].cantidad === movimiento.cantidad && object[value].descripcion === movimiento.descripcion) {
+
+                this.viajesProvider.deleteMovimiento(this.id, this.getIDMovimiento(movimiento))
+              }
+              id++;
+            }
+
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel', // will always sort to be on the bottom
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  deleteMovimiento() {
+    //this.viajesProvider.deleteMovimiento(this.viaje.key, this.getIDMovimiento(movimiento))
+  }
+
+  getIDMovimiento(movimiento) {
+    const object = this.viaje.movimientos
+    const keys = Object.keys(object);
+    for (const value of keys) {
+      if (object[value].cantidad === movimiento.cantidad && object[value].descripcion === movimiento.descripcion) {
+        return value;
+      }
+    }
+    return null;
   }
 }

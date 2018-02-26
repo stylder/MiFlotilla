@@ -5,16 +5,12 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{viaje.origen}} - {{viaje.destino}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
-
 
   <img
       [src]="'https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:O%7C'+viaje.origen+'&markers=size:mid%7Ccolor:0x00ff3b%7Clabel:D%7C'+viaje.destino+'&key=AIzaSyCizFQRBKipfnmv9CDr4bF5UYe4VyPOTH4'">
@@ -41,7 +37,15 @@
     <h2>Camión</h2>
     <p>{{viaje.camion}}</p>
   </ion-item>
-  <ion-card *ngFor="let movimiento of movimientos; let i = index">
+
+  <ion-item>
+    <ion-icon name="clipboard" item-start large></ion-icon>
+    <h2>Descripción</h2>
+    <p>{{viaje.descripcion}}</p>
+  </ion-item>
+
+
+  <ion-card *ngFor="let movimiento of movimientos; let i = index" (click)="actionMovimiento(movimiento)">
       <img [src]="movimiento.img"/>
       <ion-card-content>
         <ion-card-title>

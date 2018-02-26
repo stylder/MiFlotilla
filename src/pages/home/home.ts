@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavController, ModalController} from 'ionic-angular';
 import {ModalPage} from "../modal/modal";
 import {ViajeProvider} from "../../providers/viaje/viaje";
+import { AuthProvider } from '../../providers/auth/auth';
 
 @Component({
   selector: 'page-home',
@@ -13,10 +14,13 @@ export class HomePage implements OnInit {
 
 
   viajes: any[];
+  searchTerm: string;
+  uid: string;
 
 
   constructor(public navCtrl: NavController,
               public viajesProvider: ViajeProvider,
+              private authProvider: AuthProvider,
               public modalCtrl: ModalController) {
 
 
@@ -24,6 +28,12 @@ export class HomePage implements OnInit {
       .subscribe(viajes => {
         this.viajes = viajes;
       });
+
+    this.authProvider.Session.subscribe(session => {
+      if (session) {
+        this.uid = session.uid;
+      } 
+    });
   }
 
   getArrayObject(object) {
@@ -54,7 +64,8 @@ export class HomePage implements OnInit {
   ///////////////// FIREBASE /////////////////
   filterItems(ev: any) {
     let val = ev.target.value;
-    console.log('>>>>', val)
+    this.searchTerm = val
+    console.log('>>>>', this.searchTerm)
   }
 
   openModal() {

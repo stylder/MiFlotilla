@@ -25,6 +25,7 @@ export class AuthProvider {
       .then(user=>{
         Promise.resolve(user)
         this.user = user;
+        return user
       })
       .catch(err=>Promise.reject(err))
   }

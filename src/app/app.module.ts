@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import {MantenimientoPage} from '../pages/mantenimiento/mantenimiento'
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { ModalPage } from '../pages/modal/modal';
@@ -19,6 +20,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {environment} from '../environments/environment';
 
+// PIPES
+import {PipesModule} from '../pipes/pipes.module';
+
 // PROVIDERS
 import { AuthProvider } from '../providers/auth/auth';
 import { ViajeProvider } from '../providers/viaje/viaje';
@@ -31,6 +35,7 @@ import { CamionesProvider } from '../providers/camiones/camiones';
   declarations: [
     MyApp,
     HomePage,
+    MantenimientoPage,
     LoginPage,
     ProfilePage,
     ModalPage
@@ -40,12 +45,14 @@ import { CamionesProvider } from '../providers/camiones/camiones';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
+    MantenimientoPage,
     LoginPage,
     ProfilePage,
     ModalPage

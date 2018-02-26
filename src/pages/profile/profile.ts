@@ -19,6 +19,7 @@ export class ProfilePage {
 
   moveon = true;
   imgurl: string;
+  username: string;
   user;
 
   constructor(public auth : AuthProvider) {
@@ -26,8 +27,9 @@ export class ProfilePage {
     this.imgurl = 'assets/img/common/no-image.gif';
     this.auth.Session.subscribe(session => {
       if (session) {
-        console.log('>>', session.photoURL);
+        console.log('SESSION>>', session);
         this.imgurl = session.photoURL;
+        this.username = session.displayName;
       }
     });
   }
