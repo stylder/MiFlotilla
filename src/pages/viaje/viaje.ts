@@ -44,7 +44,7 @@ export class ViajePage {
 
     const id = navParams.get('id');
     console.log('...', id);
-    this.id = id.key ? id.key : '';
+    this.id = id.key !== undefined ? id.key : '';
 
     this.viaje = id;
 

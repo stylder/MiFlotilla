@@ -22,8 +22,6 @@
 
   
   <ion-card (click)="showViaje(viaje)" *ngFor="let viaje of viajes | filter : 'conductor' : uid | search:searchTerm">
-
-     {{uid}}
     <ion-item>
       <h2 text-center>{{viaje.origen}} - {{viaje.destino}}</h2>
       <h4 text-center>{{viaje.carga.tipo}} - {{viaje.carga.cantidad}}</h4>

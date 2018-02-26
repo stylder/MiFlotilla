@@ -1,13 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, AlertController} from 'ionic-angular';
 import {AuthProvider} from '../../providers/auth/auth';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -16,10 +10,16 @@ import {AuthProvider} from '../../providers/auth/auth';
 })
 export class LoginPage {
 
-  user = {email: '', password: ''};
+  myForm: FormGroup;
 
   constructor(public auth: AuthProvider,
+              public formBuilder: FormBuilder,
               public alertCtrl: AlertController) {
+
+    this.myForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
   ionViewDidLoad() {
@@ -28,7 +28,7 @@ export class LoginPage {
 
 
   login() {
-    this.auth.loginUser(this.user.email, this.user.password).then((user) => {
+    this.auth.loginUser(this.myForm.value.email, this.myForm.value.password).then((user) => {
       console.log(user)
     }).catch(err => {
       let alert = this.alertCtrl.create({
