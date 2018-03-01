@@ -37,7 +37,7 @@
       </ion-thumbnail>
       <h2>{{mantenimiento.tipo}}</h2>
       <p>{{mantenimiento.camion}} • {{mantenimiento.date | date:'dd/MM/yyyy' }}</p>
-      <button ion-button clear item-end>Ver</button>
+      <button ion-button clear item-end (click)="showViaje(mantenimiento.key)">Ver</button>
     </ion-item>
 
 

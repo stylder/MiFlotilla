@@ -73,15 +73,11 @@ export class ViajePage {
 
   ionViewDidLoad() {
     const id = this.navParams.get('id');
-    console.log('...', id);
     this.id = id.key !== undefined ? id.key : '';
-
     this.viaje = id;
-    console.log('ionViewDidLoad ViajePage', this.id);
     this.viajesProvider.getItem(id.key).valueChanges().subscribe((viaje) => {
       this.viaje = viaje;
       this.movimientos = this.getArrayObject(this.viaje.movimientos);
-      console.log('movimientos', this.movimientos)
     });
   }
 

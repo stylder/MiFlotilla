@@ -8,6 +8,7 @@ import {MantenimientoPage} from '../pages/mantenimiento/mantenimiento'
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { ModalPage } from '../pages/modal/modal';
+import { ModalMantenimientoPage} from '../pages/modal-mantenimiento/modal-mantenimiento';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -39,7 +40,8 @@ import { MantenimientoProvider } from '../providers/mantenimiento/mantenimiento'
     MantenimientoPage,
     LoginPage,
     ProfilePage,
-    ModalPage
+    ModalPage,
+    ModalMantenimientoPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { MantenimientoProvider } from '../providers/mantenimiento/mantenimiento'
     MantenimientoPage,
     LoginPage,
     ProfilePage,
-    ModalPage
+    ModalPage,
+    ModalMantenimientoPage
   ],
   providers: [
     StatusBar,

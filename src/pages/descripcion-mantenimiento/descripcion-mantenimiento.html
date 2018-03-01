@@ -7,12 +7,63 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>descripcionMantenimiento</ion-title>
+    <ion-title>Mantenimiento</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content *ngIf="mantenimiento">
 
+  <img
+    [src]="'https://neoattack.com/wp-content/uploads/2016/09/mantenimientoweb8.png'">
+  <ion-fab right bottom>
+    <button ion-fab (click)="takePhoto()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+  </ion-fab>
+
+
+  <ion-item>
+    <ion-icon name="navigate" item-start large></ion-icon>
+    <h2>Unidad</h2>
+    <p>{{mantenimiento.camion}}</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="cog" item-start large></ion-icon>
+    <h2>Fecha</h2>
+    <p>{{mantenimiento.date | date:'dd/MM/yyyy'}}</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="car" item-left large></ion-icon>
+    <h2>Costo</h2>
+    <p>{{mantenimiento.costo}}</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="clipboard" item-start large></ion-icon>
+    <h2>Descripción</h2>
+    <p>{{mantenimiento.descripcion}}</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="car" item-left large></ion-icon>
+    <h2>{{mantenimiento.descripcion}}</h2>
+  </ion-item>
+
+  <div *ngIf="movimientos">
+    <ion-card *ngFor="let movimiento of movimientos; let i = index" (click)="actionMovimiento(movimiento)">
+      <img [src]="movimiento.img"/>
+      <ion-card-content>
+        <ion-card-title>
+          {{movimiento.cantidad | currency:'MXN'}}
+        </ion-card-title>
+        <p>
+          {{movimiento.descripcion}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

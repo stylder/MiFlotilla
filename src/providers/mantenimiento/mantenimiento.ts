@@ -53,12 +53,12 @@ export class MantenimientoProvider {
   }
 
   addMovimiento(id, movimiento) {
-    this.afd.list('/viajes/' + id + '/movimientos/').push(movimiento);
+    this.afd.list('/mantenimietos/' + id + '/movimientos/').push(movimiento);
   }
 
   deleteMovimiento(viaje: string, movimiento: string) {
     console.log('Delete Movimiento', viaje, movimiento);
-    this.afd.database.ref('viajes/').ref.child(viaje).child('/movimientos/' + movimiento).remove();
+    this.afd.database.ref('mantenimietos/').ref.child(viaje).child('/movimientos/' + movimiento).remove();
   }
 
 }

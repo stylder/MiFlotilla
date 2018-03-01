@@ -16,9 +16,7 @@ export class FilterPipe implements PipeTransform {
     if (!items) return [];
     if (!value || value.length == 0) return items;
     return items.filter(it =>{
-      console.log('Filter: ', value)
-      console.log('Value: ', field)
-      return it[field] == (value) 
+      return it[field] == (value)
     });
   }
 }

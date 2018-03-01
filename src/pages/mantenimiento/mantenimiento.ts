@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { MantenimientoProvider} from '../../providers/mantenimiento/mantenimiento';
-import {ModalPage} from "../modal/modal";
+import {ModalMantenimientoPage} from "../modal-mantenimiento/modal-mantenimiento";
 import * as firebase from "firebase";
 import enableLogging = firebase.database.enableLogging;
 
@@ -48,7 +48,7 @@ export class MantenimientoPage {
 
   showViaje(id) {
     console.log('cambiar vista', id);
-    this.navCtrl.push('ViajePage', {id: id});
+    this.navCtrl.push('DescripcionMantenimientoPage', {id: id});
   }
 
   filterItems(ev: any) {
@@ -57,13 +57,13 @@ export class MantenimientoPage {
 
   openModal() {
     const data = {message: 'hello world'};
-    const modalPage = this.modalCtrl.create(ModalPage, data);
+    const modalPage = this.modalCtrl.create(ModalMantenimientoPage, data);
     modalPage.present();
   }
 
 
   openBasicModal() {
-    let myModal = this.modalCtrl.create(ModalPage);
+    let myModal = this.modalCtrl.create(ModalMantenimientoPage);
     myModal.present();
   }
 
