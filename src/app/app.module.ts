@@ -27,6 +27,7 @@ import {PipesModule} from '../pipes/pipes.module';
 import { AuthProvider } from '../providers/auth/auth';
 import { ViajeProvider } from '../providers/viaje/viaje';
 import { CamionesProvider } from '../providers/camiones/camiones';
+import { MantenimientoProvider } from '../providers/mantenimiento/mantenimiento';
 
 
 
@@ -65,6 +66,7 @@ import { CamionesProvider } from '../providers/camiones/camiones';
     AuthProvider,
     ViajeProvider,
     CamionesProvider,
+    MantenimientoProvider,
   ]
 })
 export class AppModule {}

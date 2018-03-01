@@ -25,7 +25,15 @@ export class ViajePage {
   myPhoto: any;
   myPhotoURL: any;
   id;
-  viaje: Viaje;
+  viaje: Viaje = {
+    origen:'',
+    destino: '',
+    key:'',
+    carga: {
+      cantidad:'',
+      tipo: ''
+    }
+  };
   movimientos: any[];
 
   constructor(public viajesProvider: ViajeProvider,
@@ -42,18 +50,9 @@ export class ViajePage {
     });
     loader.present();
 
-    const id = navParams.get('id');
-    console.log('...', id);
-    this.id = id.key !== undefined ? id.key : '';
 
-    this.viaje = id;
 
-    this.viajesProvider.getItem(id.key).valueChanges().subscribe((viaje) => {
-      this.viaje = viaje
-      console.log('CARGANDO IMGAEN', this.viaje)
-      this.movimientos = this.getArrayObject(this.viaje.movimientos);
-      console.log('movimientos', this.movimientos)
-    })
+
 
 
     this.myPhotosRef = firebase.storage().ref('/movimientos/');
@@ -73,7 +72,17 @@ export class ViajePage {
   }
 
   ionViewDidLoad() {
+    const id = this.navParams.get('id');
+    console.log('...', id);
+    this.id = id.key !== undefined ? id.key : '';
+
+    this.viaje = id;
     console.log('ionViewDidLoad ViajePage', this.id);
+    this.viajesProvider.getItem(id.key).valueChanges().subscribe((viaje) => {
+      this.viaje = viaje;
+      this.movimientos = this.getArrayObject(this.viaje.movimientos);
+      console.log('movimientos', this.movimientos)
+    });
   }
 
   takePhoto() {
@@ -211,7 +220,7 @@ export class ViajePage {
   }
 
   deleteMovimiento() {
-    //this.viajesProvider.deleteMovimiento(this.viaje.key, this.getIDMovimiento(movimiento))
+    //this.mantenimientoProvider.deleteMovimiento(this.viaje.key, this.getIDMovimiento(movimiento))
   }
 
   getIDMovimiento(movimiento) {

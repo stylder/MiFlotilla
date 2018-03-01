@@ -15,7 +15,7 @@
 
 
 
-<ion-content class="card-background-page" *ngIf="mantenimientos">
+<ion-content class="card-background-page" >
 
   <ion-fab right bottom>
     <button ion-fab (click)="openBasicModal()">
@@ -24,42 +24,25 @@
   </ion-fab>
 
   <ion-toolbar no-border-top>
-    <ion-searchbar placeholder="Filtrar mantenimientos" (ionInput)="filterItems($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Filtrar Mantenimientos" (ionInput)="filterItems($event)"></ion-searchbar>
   </ion-toolbar>
 
-  <ion-card (click)="showViaje(viaje)" *ngFor="let viaje of mantenimientos| search:searchTerm">
 
-    <ion-item>
-      <h2 text-center>{{viaje.origen}} - {{viaje.destino}}</h2>
-      <h4 text-center>{{viaje.carga.tipo}} - {{viaje.carga.cantidad}}</h4>
+
+  <ion-list *ngIf="mantenimientos">
+
+    <ion-item *ngFor="let mantenimiento of mantenimientos| search:searchTerm">
+      <ion-thumbnail item-start>
+        <img [src]="mantenimiento.img">
+      </ion-thumbnail>
+      <h2>{{mantenimiento.tipo}}</h2>
+      <p>{{mantenimiento.camion}} • {{mantenimiento.date | date:'dd/MM/yyyy' }}</p>
+      <button ion-button clear item-end>Ver</button>
     </ion-item>
-    <img [src]="'https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:O%7C'+viaje.origen+'&markers=size:mid%7Ccolor:0x00ff3b%7Clabel:D%7C'+viaje.destino+'&key=AIzaSyCizFQRBKipfnmv9CDr4bF5UYe4VyPOTH4'"
-      alt="Google Map of " />
-    <ion-card-content>
-      <p>
-        {{viaje.descripcion}}
-      </p>
-    </ion-card-content>
 
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-left clear small>
-          <ion-icon name="star" *ngFor="let x of range(viaje.estrellas)"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left clear small>
-          <ion-icon name="text"></ion-icon>
-          <div *ngIf="viaje.movimientos">{{getArrayObject(viaje.movimientos).length}} Mov.</div>
-          <div *ngIf="!viaje?.movimientos">{{0}} Mov.</div>
 
-        </button>
-      </ion-col>
-      <ion-col center text-center>
-        <ion-note>
-          {{viaje.date | date}}
-        </ion-note>
-      </ion-col>
-    </ion-row>
-  </ion-card>
+
+  </ion-list>
+
+
 </ion-content>
