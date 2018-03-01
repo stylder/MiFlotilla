@@ -22,12 +22,14 @@
     "@angular/platform-browser-dynamic": "5.0.3",
     "@ionic-native/camera": "^4.5.2",
     "@ionic-native/core": "4.4.0",
+    "@ionic-native/crop": "^4.5.3",
     "@ionic-native/firebase": "^4.5.2",
     "@ionic-native/splash-screen": "4.4.0",
     "@ionic-native/status-bar": "4.4.0",
     "@ionic/pro": "1.0.16",
     "@ionic/storage": "2.1.3",
     "angularfire2": "^5.0.0-rc.4",
+    "cordova-android": "~7.0.0",
     "cordova-plugin-camera": "^3.0.0",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-firebase": "^0.1.25",
@@ -40,8 +42,7 @@
     "ionicons": "3.0.0",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18",
-    "cordova-android": "~7.0.0"
+    "zone.js": "0.8.18"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.6",

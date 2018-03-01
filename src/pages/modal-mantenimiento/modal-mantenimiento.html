@@ -11,42 +11,56 @@
 
 <ion-content padding>
 
+  <form [formGroup]="groupForm">
+
+
+
 
   <ion-list>
 
     <ion-item>
       <ion-label>Fecha Viaje</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY"></ion-datetime>
+      <ion-datetime displayFormat="DD MMM YYYY" formControlName="date"></ion-datetime>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Origen</ion-label>
-      <ion-input type="text" value=""></ion-input>
+        <ion-label stacked>Tipo</ion-label>
+      <ion-input type="text"  formControlName="tipo"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label stacked>Destino</ion-label>
-      <ion-input type="text" value=""></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>Carga</ion-label>
-      <ion-input type="text" value=""></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>Cantidad</ion-label>
-      <ion-input type="text" value=""></ion-input>
+      <ion-label stacked>Costo</ion-label>
+      <ion-input type="number" formControlName="costo"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Camión</ion-label>
-      <ion-select>
-        <ion-option [value]="camion.identificador"  *ngFor="let camion of camiones">{{camion.identificador}}</ion-option>
+      <ion-select formControlName="camion">
+        <ion-option [value]="camion.identificador" *ngFor="let camion of camiones" >{{camion.identificador}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label stacked>Descripción</ion-label>
-      <ion-input type="text" value=""></ion-input>
+      <ion-input type="text"
+                 [value]="groupForm.value.descripcion"
+                 formControlName="descripcion">
+      </ion-input>
     </ion-item>
   </ion-list>
 
-  <button ion-button full (click)="guardarViaje()">Guardar</button>
+    <button ion-button full (click)="takePhoto()">
+      Fotografía
+    </button>
+
+    <ion-card>
+      <img [src]="groupForm.value.img" />
+    </ion-card>
+
+    {{groupForm.value |json}}
+
+  <button ion-button full
+          [disabled]="!groupForm.valid"
+          (click)="addMantenimiento(groupForm.value)">
+    Guardar
+  </button>
+  </form>
 
 </ion-content>

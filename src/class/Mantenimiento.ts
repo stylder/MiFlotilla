@@ -5,6 +5,7 @@ export class Mantenimiento {
   costo?: string;
   date?: any;
   descripcion?: string;
+  img?: string;
 
   movimientos?: [{
     cantidad: string;

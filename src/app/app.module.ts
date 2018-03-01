@@ -13,6 +13,7 @@ import { ModalMantenimientoPage} from '../pages/modal-mantenimiento/modal-manten
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Camera } from '@ionic-native/camera';
+import { Crop } from '@ionic-native/crop';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -65,6 +66,7 @@ import { MantenimientoProvider } from '../providers/mantenimiento/mantenimiento'
     StatusBar,
     SplashScreen,
     Camera,
+    Crop,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     ViajeProvider,
