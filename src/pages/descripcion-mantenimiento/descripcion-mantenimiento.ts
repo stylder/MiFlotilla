@@ -8,6 +8,7 @@ import {Mantenimiento} from "../../class/Mantenimiento";
 import {Camera} from "@ionic-native/camera";
 import firebase from 'firebase';
 
+
 /**
  * Generated class for the DescripcionMantenimientoPage page.
  *
@@ -229,7 +230,7 @@ export class DescripcionMantenimientoPage {
     return null;
   }
 
-  private generateUUID(): any {
+  generateUUID(): string {
     let d = new Date().getTime();
     const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
       let r = (d + Math.random() * 16) % 16 | 0;
@@ -237,6 +238,62 @@ export class DescripcionMantenimientoPage {
       return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
     return uuid;
+  }
+
+  updateImgMantenimiento (){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modifica tu movimiento',
+      buttons: [
+        {
+          text: 'Fotografía',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'camera' : null,
+          handler: () => {
+            this.upload(this.Camera.PictureSourceType.CAMERA)
+          }
+        },
+        {
+          text: 'Galería',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'images' : null,
+          handler: () => {
+            this.upload(this.Camera.PictureSourceType.PHOTOLIBRARY)
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel', // will always sort to be on the bottom
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+
+  upload(type){
+    this.Camera.getPicture({
+      quality: 50,
+      destinationType: this.Camera.DestinationType.DATA_URL,
+      sourceType: type,
+      encodingType: this.Camera.EncodingType.JPEG,
+      saveToPhotoAlbum: true,
+      correctOrientation: true
+    }).then(imageData => {
+      this.presentLoading();
+      this.myPhotosRef.child(this.generateUUID() + '.jpeg')
+        .putString(imageData, 'base64', {contentType: 'image/jpeg'})
+        .then((savedPicture) => {
+          this.mantenimiento.img = savedPicture.downloadURL;
+          this.mantenimientoProvider.updateItem(this.key, this.mantenimiento)
+
+        });
+    }, error => {
+      console.log("ERROR -> " + JSON.stringify(error));
+    });
   }
 
 

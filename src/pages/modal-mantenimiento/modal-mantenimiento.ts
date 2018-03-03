@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, ViewController} from 'ionic-angular';
+import {
+  ActionSheetController, AlertController, IonicPage, LoadingController, Platform,
+  ViewController
+} from 'ionic-angular';
 import {Viaje} from "../../class/Viajes";
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
@@ -33,6 +36,8 @@ export class ModalMantenimientoPage {
   constructor(public viewCtrl: ViewController,
               private fb: FormBuilder,
               private camera:Camera,
+              public platform: Platform,
+              public actionSheetCtrl: ActionSheetController,
               private camionesProvider: CamionesProvider,
               private mantenimientoProvider: MantenimientoProvider) {
 
@@ -57,38 +62,65 @@ export class ModalMantenimientoPage {
     })
   }
 
-  takePhoto() {
 
+
+  takePhoto (){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modifica tu movimiento',
+      buttons: [
+        {
+          text: 'Fotografía',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'camera' : null,
+          handler: () => {
+            this.upload(this.camera.PictureSourceType.CAMERA)
+          }
+        },
+        {
+          text: 'Galería',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'images' : null,
+          handler: () => {
+            this.upload(this.camera.PictureSourceType.PHOTOLIBRARY)
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel', // will always sort to be on the bottom
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+
+  upload(type){
     this.camera.getPicture({
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
-      sourceType: this.camera.PictureSourceType.CAMERA,
+      sourceType: type,
       encodingType: this.camera.EncodingType.JPEG,
       saveToPhotoAlbum: true,
       correctOrientation: true
     }).then(imageData => {
-
-      this.myPhoto = imageData;
-      this.uploadPhoto();
+      this.myPhotosRef.child(this.generateUUID() + '.jpeg')
+        .putString(imageData, 'base64', {contentType: 'image/jpeg'})
+        .then((savedPicture) => {
+          this.groupForm.value.img  = savedPicture.downloadURL;
+        });
     }, error => {
       console.log("ERROR -> " + JSON.stringify(error));
     });
-  }
-
-  uploadPhoto() {
-    this.myPhotosRef.child(this.generateUUID() + '.jpeg')
-      .putString(this.myPhoto, 'base64', { contentType: 'image/jpeg' })
-      .then((savedPicture) => {
-        this.groupForm.value.img  = savedPicture.downloadURL;
-      });
   }
 
   addMantenimiento(movimiento){
     this.mantenimientoProvider.addItem(movimiento);
     this.viewCtrl.dismiss();
   }
-
-
 
   dismiss() {
     this.viewCtrl.dismiss();

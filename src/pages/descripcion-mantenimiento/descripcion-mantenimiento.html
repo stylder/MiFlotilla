@@ -16,6 +16,7 @@
 <ion-content *ngIf="mantenimiento">
 
   <img
+    (click)="updateImgMantenimiento()"
     [src]="mantenimiento.img" onerror="this.src='https://neoattack.com/wp-content/uploads/2016/09/mantenimientoweb8.png'">
   <ion-fab right bottom>
     <button ion-fab (click)="showOptions()">
