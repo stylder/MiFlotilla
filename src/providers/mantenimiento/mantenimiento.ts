@@ -53,6 +53,7 @@ export class MantenimientoProvider {
   }
 
   addMovimiento(id, movimiento) {
+    console.log('ID', id, 'Movimiento', movimiento);
     this.afd.list('/mantenimietos/' + id + '/movimientos/').push(movimiento);
   }
 

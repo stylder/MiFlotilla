@@ -6,6 +6,7 @@ import {
 } from 'ionic-angular';
 import {Mantenimiento} from "../../class/Mantenimiento";
 import {Camera} from "@ionic-native/camera";
+import firebase from 'firebase';
 
 /**
  * Generated class for the DescripcionMantenimientoPage page.
@@ -38,6 +39,9 @@ export class DescripcionMantenimientoPage {
               public actionSheetCtrl: ActionSheetController,
               public Camera: Camera,
               private mantenimientoProvider: MantenimientoProvider) {
+
+    this.myPhotosRef = firebase.storage().ref('/movimientos/');
+
   }
 
   ionViewDidLoad() {
@@ -52,11 +56,11 @@ export class DescripcionMantenimientoPage {
     })
   }
 
-  takePhoto() {
+  takePhoto(type) {
     this.Camera.getPicture({
       quality: 50,
       destinationType: this.Camera.DestinationType.DATA_URL,
-      sourceType: this.Camera.PictureSourceType.CAMERA,
+      sourceType: type,
       encodingType: this.Camera.EncodingType.JPEG,
       saveToPhotoAlbum: true,
       correctOrientation: true
@@ -131,10 +135,8 @@ export class DescripcionMantenimientoPage {
                   img: this.myPhotoURL
                 };
 
-                console.log('Saved clicked', data);
 
                 this.mantenimientoProvider.addMovimiento(this.key, movimiento);
-                this.movimientos.push(movimiento);
               }
             }
           ]
@@ -168,6 +170,39 @@ export class DescripcionMantenimientoPage {
               id++;
             }
 
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel', // will always sort to be on the bottom
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  showOptions() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modifica tu movimiento',
+      buttons: [
+        {
+          text: 'Fotografía',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'camera' : null,
+          handler: () => {
+            this.takePhoto(this.Camera.PictureSourceType.CAMERA)
+          }
+        },
+        {
+          text: 'Galería',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'images' : null,
+          handler: () => {
+            this.takePhoto(this.Camera.PictureSourceType.PHOTOLIBRARY)
           }
         },
         {

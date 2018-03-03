@@ -51,10 +51,6 @@ export class ViajePage {
     loader.present();
 
 
-
-
-
-
     this.myPhotosRef = firebase.storage().ref('/movimientos/');
   }
 
@@ -75,18 +71,22 @@ export class ViajePage {
     const id = this.navParams.get('id');
     this.id = id.key !== undefined ? id.key : '';
     this.viaje = id;
-    this.viajesProvider.getItem(id.key).valueChanges().subscribe((viaje) => {
+    this.viajesProvider.getItem(id.key).valueChanges().subscribe((viaje: any) => {
       this.viaje = viaje;
-      this.movimientos = this.getArrayObject(this.viaje.movimientos);
+      if(viaje.movimientos !== null){
+        this.movimientos = this.getArrayObject(this.viaje.movimientos);
+      }else{
+        this.movimientos = [];
+      }
     });
   }
 
-  takePhoto() {
+  takePhoto(type) {
 
     this.Camera.getPicture({
       quality: 50,
       destinationType: this.Camera.DestinationType.DATA_URL,
-      sourceType: this.Camera.PictureSourceType.CAMERA,
+      sourceType: type,
       encodingType: this.Camera.EncodingType.JPEG,
       saveToPhotoAlbum: true,
       correctOrientation: true
@@ -162,8 +162,37 @@ export class ViajePage {
       });
   }
 
-  showPrompt() {
-
+  showOptions() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modifica tu movimiento',
+      buttons: [
+        {
+          text: 'Fotografía',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'camera' : null,
+          handler: () => {
+            this.takePhoto(this.Camera.PictureSourceType.CAMERA)
+          }
+        },
+        {
+          text: 'Galería',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'images' : null,
+          handler: () => {
+            this.takePhoto(this.Camera.PictureSourceType.PHOTOLIBRARY)
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel', // will always sort to be on the bottom
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   private generateUUID(): any {
