@@ -14,7 +14,6 @@ import {ViajeProvider} from "../../providers/viaje/viaje";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-modal',
   templateUrl: 'modal.html',

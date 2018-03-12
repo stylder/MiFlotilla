@@ -12,7 +12,6 @@ import enableLogging = firebase.database.enableLogging;
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-mantenimiento',
   templateUrl: 'mantenimiento.html',

@@ -9,7 +9,6 @@ import { AuthProvider } from '../../providers/auth/auth';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',

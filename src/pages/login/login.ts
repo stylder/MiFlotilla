@@ -3,7 +3,6 @@ import {IonicPage, AlertController} from 'ionic-angular';
 import {AuthProvider} from '../../providers/auth/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',

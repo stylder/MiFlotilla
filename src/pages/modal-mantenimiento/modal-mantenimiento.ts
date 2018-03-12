@@ -18,7 +18,7 @@ import { Camera } from '@ionic-native/camera';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-modal-mantenimiento',
   templateUrl: 'modal-mantenimiento.html',
